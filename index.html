@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Action Figures D'Labs3D – Edição 1 BOPE</title>
+<style>
+:root{
+  --blue:#0878ff;
+  --blue2:#0ea5e9;
+  --dark:#07111f;
+  --black:#05070b;
+  --bg:#f4f8ff;
+  --card:#ffffff;
+  --text:#111827;
+  --muted:#64748b;
+  --green:#16a34a;
+  --red:#dc2626;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial, Helvetica, sans-serif;background:var(--bg);color:var(--text)}
+header{
+  background:linear-gradient(135deg,#001a38,#075bb5,#13a7ff);
+  color:white;padding:42px 18px;text-align:center
+}
+header h1{margin:0;font-size:40px;letter-spacing:.3px}
+header p{font-size:18px;margin:10px auto 0;max-width:760px;line-height:1.45}
+nav{
+  position:sticky;top:0;z-index:20;background:#ffffffdd;backdrop-filter:blur(10px);
+  box-shadow:0 3px 14px rgba(0,0,0,.10);display:flex;gap:8px;justify-content:center;
+  flex-wrap:wrap;padding:10px
+}
+nav button{border:0;border-radius:999px;padding:10px 15px;background:#e9f3ff;color:#075bb5;font-weight:800;cursor:pointer}
+nav button.active, nav button:hover{background:#075bb5;color:#fff}
+.container{max-width:1180px;margin:0 auto;padding:22px 14px}
+.section{display:none}.section.active{display:block}
+.card{background:var(--card);border-radius:18px;padding:18px;box-shadow:0 5px 22px rgba(0,0,0,.08);margin-bottom:18px}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;align-items:stretch}
+.hero h2{font-size:36px;margin:0 0 10px;color:#0b1220}
+.badges{margin:12px 0}
+.badge{display:inline-block;background:#dbeafe;color:#1d4ed8;border-radius:999px;padding:8px 11px;font-weight:800;font-size:13px;margin:4px}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+button{border:0;border-radius:12px;padding:12px 14px;font-weight:800;cursor:pointer;font-size:14px}
+.primary{background:#075bb5;color:white}
+.secondary{background:#e5e7eb;color:#111827}
+.whats{background:#25d366;color:white}
+.danger{background:#ef4444;color:white}
+.dark{background:#111827;color:white}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.product{overflow:hidden}
+.product img{width:100%;height:260px;object-fit:cover;border-radius:16px;background:#e5e7eb}
+.product h3{font-size:24px;margin:14px 0 4px}
+.price{color:#075bb5;font-weight:900;font-size:22px}
+.small{color:var(--muted);font-size:13px;line-height:1.35}
+.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.full{grid-column:1/-1}
+label{font-size:13px;font-weight:800;margin-bottom:5px;display:block}
+input,select,textarea{
+  width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:12px;background:white;
+  font-size:15px;outline:none
+}
+input:focus,select:focus,textarea:focus{border-color:#0878ff;box-shadow:0 0 0 3px #0878ff22}
+textarea{min-height:82px;resize:vertical}
+.summary{white-space:pre-wrap;background:#f8fafc;border:1px dashed #94a3b8;border-radius:14px;padding:14px;margin-top:12px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat{background:#fff;border-radius:16px;padding:16px;box-shadow:0 5px 22px rgba(0,0,0,.08)}
+.stat span{color:#64748b;font-size:13px;font-weight:800}
+.stat b{font-size:24px;color:#075bb5}
+.tablewrap{overflow:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:10px;border-bottom:1px solid #e5e7eb;text-align:left;vertical-align:top}
+th{background:#f8fafc}
+.status{font-weight:900;border-radius:999px;padding:5px 8px;display:inline-block;background:#eef2ff;color:#3730a3;font-size:12px}
+.notice{background:#fff7ed;color:#9a3412;border:1px solid #fed7aa;border-radius:14px;padding:12px;line-height:1.45}
+.paybox{background:#eff6ff;border:1px solid #bfdbfe;border-radius:16px;padding:14px;margin-top:12px}
+.hidden{display:none!important}
+footer{text-align:center;color:#64748b;padding:26px}
+.previewLogo{
+  background:linear-gradient(145deg,#001a38,#075bb5);border-radius:18px;min-height:260px;
+  display:flex;align-items:center;justify-content:center;color:white;flex-direction:column;text-align:center;padding:26px
+}
+.previewLogo strong{font-size:42px}
+.previewLogo span{font-size:18px;margin-top:10px}
+@media(max-width:900px){
+  .hero,.grid,.formgrid,.stats{grid-template-columns:1fr}
+  header h1{font-size:30px}
+  .hero h2{font-size:28px}
+  .product img{height:220px}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Action Figures D'Labs3D</h1>
+  <p>Edição 1 BOPE • Personagens colecionáveis de 15 cm produzidos em impressão 3D</p>
+</header>
+
+<nav>
+  <button class="nav active" onclick="show('inicio',this)">Início</button>
+  <button class="nav" onclick="show('catalogo',this)">Catálogo</button>
+  <button class="nav" onclick="show('pedido',this)">Pedido</button>
+  <button class="nav" onclick="show('pagamento',this)">Pagamento</button>
+  <button class="nav" onclick="show('adminLogin',this)">Painel</button>
+</nav>
+
+<div class="container">
+
+<section id="inicio" class="section active">
+  <div class="hero">
+    <div class="card">
+      <div class="badges">
+        <span class="badge">Edição 1 BOPE</span>
+        <span class="badge">15 cm</span>
+        <span class="badge">R$ 119,90</span>
+        <span class="badge">dlabs3d.com.br</span>
+      </div>
+      <h2>Pré-venda oficial dos Action Figures D'Labs3D</h2>
+      <p>Escolha seu personagem, preencha seus dados e registre o pedido. O frete será calculado após o pedido, conforme CEP e forma de entrega.</p>
+      <div class="cta">
+        <button class="primary" onclick="go('catalogo')">Ver personagens</button>
+        <button class="secondary" onclick="go('pedido')">Fazer pedido</button>
+      </div>
+    </div>
+    <div class="previewLogo">
+      <strong>D'Labs3D</strong>
+      <span>Action Figures Deluxe<br>Edição 1 BOPE</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Informações da pré-venda</h2>
+    <p><b>Produto:</b> Action Figures Deluxe – Edição 1 BOPE</p>
+    <p><b>Tamanho:</b> 15 centímetros</p>
+    <p><b>Valor:</b> R$ 119,90</p>
+    <p><b>Entrega:</b> Correios, retirada em mãos ou motoboy na Grande São Paulo.</p>
+    <p><b>Pagamento:</b> Pix ou Mercado Pago.</p>
+  </div>
+</section>
+
+<section id="catalogo" class="section">
+  <div class="grid">
+    <div class="card product">
+      <img src="assets/dcosta.png" alt="Personagem Dcosta">
+      <h3>Personagem Dcosta</h3>
+      <p class="small">Action Figures Deluxe • Edição 1 BOPE • 15 cm</p>
+      <p class="price">R$ 119,90</p>
+      <button class="primary" onclick="selectProduct('Personagem Dcosta')">Escolher Dcosta</button>
+    </div>
+    <div class="card product">
+      <img src="assets/bagual.png" alt="Personagem Bagual">
+      <h3>Personagem Bagual</h3>
+      <p class="small">Action Figures Deluxe • Edição 1 BOPE • 15 cm</p>
+      <p class="price">R$ 119,90</p>
+      <button class="primary" onclick="selectProduct('Personagem Bagual')">Escolher Bagual</button>
+    </div>
+    <div class="card product">
+      <img src="assets/paulo.png" alt="Personagem Paulo">
+      <h3>Personagem Paulo</h3>
+      <p class="small">Action Figures Deluxe • Edição 1 BOPE • 15 cm</p>
+      <p class="price">R$ 119,90</p>
+      <button class="primary" onclick="selectProduct('Personagem Paulo')">Escolher Paulo</button>
+    </div>
+  </div>
+</section>
+
+<section id="pedido" class="section">
+  <div class="card">
+    <h2>Cadastro do pedido</h2>
+    <div class="formgrid">
+      <div><label>Nome completo</label><input id="nome" placeholder="Nome do cliente"></div>
+      <div><label>CPF</label><input id="cpf" placeholder="000.000.000-00"></div>
+      <div><label>WhatsApp</label><input id="whatsapp" placeholder="11999999999"></div>
+      <div><label>Personagem</label><select id="personagem"><option>Personagem Dcosta</option><option>Personagem Bagual</option><option>Personagem Paulo</option></select></div>
+      <div><label>Produto</label><input id="produto" value="Action Figures Deluxe - Edição 1 BOPE - 15 cm" readonly></div>
+      <div><label>Valor</label><input id="valor" value="119.90" readonly></div>
+      <div><label>CEP</label><input id="cep" placeholder="00000-000"></div>
+      <div><label>Rua e número</label><input id="rua" placeholder="Rua, número e complemento"></div>
+      <div><label>Bairro</label><input id="bairro" placeholder="Bairro"></div>
+      <div><label>Cidade</label><input id="cidade" placeholder="Cidade"></div>
+      <div><label>Estado</label><input id="estado" placeholder="SP"></div>
+      <div><label>Forma de entrega</label><select id="entrega"><option>Correios</option><option>Motoboy - Grande São Paulo</option><option>Retirada em mãos</option></select></div>
+      <div><label>Forma de pagamento</label><select id="pagamento"><option>Pix</option><option>Mercado Pago</option></select></div>
+      <div><label>Status do pagamento</label><select id="statusPagamento"><option>Aguardando pagamento</option><option>Pago</option></select></div>
+      <div class="full"><label>Observações</label><textarea id="obs" placeholder="Observações do pedido, referência de entrega, detalhes combinados..."></textarea></div>
+    </div>
+
+    <div class="notice">
+      O frete será calculado após o pedido, conforme CEP e forma de entrega escolhida.
+    </div>
+
+    <div class="cta">
+      <button class="primary" onclick="salvarPedido()">Salvar pedido</button>
+      <button class="secondary" onclick="gerarResumo()">Gerar resumo</button>
+      <button class="whats" onclick="enviarWhatsApp()">Enviar no WhatsApp</button>
+      <button class="danger" onclick="limparPedido()">Limpar</button>
+    </div>
+
+    <div id="resumo" class="summary">O resumo do pedido aparecerá aqui.</div>
+  </div>
+</section>
+
+<section id="pagamento" class="section">
+  <div class="card">
+    <h2>Pagamento</h2>
+    <div class="notice">
+      Nesta versão, o Pix e o Mercado Pago funcionam como controle manual. Para confirmação automática do pagamento, será necessário integrar a API do Mercado Pago em uma próxima etapa.
+    </div>
+    <div class="formgrid">
+      <div><label>Chave Pix</label><input id="pixKey" placeholder="Sua chave Pix"></div>
+      <div><label>Link Mercado Pago</label><input id="mpLink" placeholder="Cole o link de pagamento do Mercado Pago"></div>
+    </div>
+    <div class="cta">
+      <button class="primary" onclick="salvarConfig()">Salvar</button>
+      <button class="secondary" onclick="copiarPix()">Copiar Pix</button>
+      <button class="dark" onclick="abrirMP()">Abrir Mercado Pago</button>
+    </div>
+    <div class="paybox">
+      <p><b>Valor do produto:</b> R$ 119,90</p>
+      <p><b>Frete:</b> calculado após o pedido.</p>
+    </div>
+  </div>
+</section>
+
+<section id="adminLogin" class="section">
+  <div class="card">
+    <h2>Área administrativa</h2>
+    <p>Digite a senha para acessar o painel.</p>
+    <div class="formgrid">
+      <div><label>Senha</label><input id="adminPass" type="password" placeholder="Senha do painel"></div>
+    </div>
+    <div class="cta">
+      <button class="primary" onclick="loginAdmin()">Entrar</button>
+    </div>
+    <p class="small">Senha padrão: <b>dlabs3d</b>. Você pode alterar no código depois.</p>
+  </div>
+</section>
+
+<section id="painel" class="section">
+  <div class="stats">
+    <div class="stat"><span>Pedidos</span><br><b id="sPedidos">0</b></div>
+    <div class="stat"><span>Total vendido</span><br><b id="sVendido">R$ 0,00</b></div>
+    <div class="stat"><span>Pagos</span><br><b id="sPagos">0</b></div>
+    <div class="stat"><span>Aguardando</span><br><b id="sAguardando">0</b></div>
+  </div>
+
+  <div class="card">
+    <h2>Pedidos recebidos</h2>
+    <div class="formgrid">
+      <div><label>Buscar por CPF ou WhatsApp</label><input id="busca" placeholder="Digite CPF, nome ou WhatsApp" oninput="renderPedidos()"></div>
+      <div><label>Filtrar status</label><select id="filtroStatus" onchange="renderPedidos()"><option>Todos</option><option>Pedido recebido</option><option>Em produção</option><option>Finalizado</option><option>Enviado</option><option>Entregue</option></select></div>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Cliente</th><th>Pedido</th><th>Endereço</th><th>Pagamento</th><th>Status</th><th>Ações</th></tr>
+        </thead>
+        <tbody id="listaPedidos"></tbody>
+      </table>
+    </div>
+    <div class="cta">
+      <button class="secondary" onclick="exportarPedidos()">Exportar CSV</button>
+      <button class="danger" onclick="apagarTudo()">Apagar todos</button>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  D'Labs3D • dlabs3d.com.br • @dlabs3d
+</footer>
+
+<script>
+const PRECO = 119.90;
+const ADMIN_PASSWORD = "dlabs3d";
+let pedidos = JSON.parse(localStorage.getItem("dlabs_pedidos_final") || "[]");
+let config = JSON.parse(localStorage.getItem("dlabs_config_final") || "{}");
+
+function brl(v){return (Number(v)||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});}
+function get(id){return document.getElementById(id);}
+function val(id){return get(id).value.trim();}
+
+function show(id, btn){
+  document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+  get(id).classList.add("active");
+  document.querySelectorAll(".nav").forEach(b=>b.classList.remove("active"));
+  if(btn) btn.classList.add("active");
+  renderPedidos();
+}
+function go(id){
+  document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+  get(id).classList.add("active");
+  document.querySelectorAll(".nav").forEach(b=>b.classList.remove("active"));
+}
+function selectProduct(p){
+  get("personagem").value = p;
+  go("pedido");
+}
+function validar(){
+  const obrig = ["nome","cpf","whatsapp","cep","rua","bairro","cidade","estado"];
+  for(const id of obrig){
+    if(!val(id)){alert("Preencha o campo: " + get(id).previousElementSibling.textContent); return false;}
+  }
+  return true;
+}
+function gerarResumo(){
+  const texto = `Resumo do pedido D'Labs3D
+
+Produto: Action Figures Deluxe - Edição 1 BOPE
+Personagem: ${val("personagem")}
+Tamanho: 15 cm
+Valor: ${brl(PRECO)}
+Frete: calculado após o pedido
+
+Cliente: ${val("nome")}
+CPF: ${val("cpf")}
+WhatsApp: ${val("whatsapp")}
+
+Entrega: ${val("entrega")}
+Endereço:
+CEP: ${val("cep")}
+Rua/Número: ${val("rua")}
+Bairro: ${val("bairro")}
+Cidade/Estado: ${val("cidade")} - ${val("estado")}
+
+Pagamento: ${val("pagamento")}
+Status do pagamento: ${val("statusPagamento")}
+
+Observações: ${val("obs") || "-"}`;
+  get("resumo").textContent = texto;
+  return texto;
+}
+function salvarPedido(){
+  if(!validar()) return;
+  const pedido = {
+    id: Date.now(),
+    data: new Date().toLocaleString("pt-BR"),
+    nome: val("nome"),
+    cpf: val("cpf"),
+    whatsapp: val("whatsapp"),
+    personagem: val("personagem"),
+    produto: val("produto"),
+    valor: PRECO,
+    cep: val("cep"),
+    rua: val("rua"),
+    bairro: val("bairro"),
+    cidade: val("cidade"),
+    estado: val("estado"),
+    entrega: val("entrega"),
+    pagamento: val("pagamento"),
+    statusPagamento: val("statusPagamento"),
+    statusPedido: "Pedido recebido",
+    obs: val("obs")
+  };
+  pedidos.push(pedido);
+  localStorage.setItem("dlabs_pedidos_final", JSON.stringify(pedidos));
+  gerarResumo();
+  alert("Pedido salvo com sucesso!");
+  renderPedidos();
+}
+function enviarWhatsApp(){
+  const texto = gerarResumo();
+  const fone = val("whatsapp").replace(/\D/g,"");
+  if(!fone){alert("Coloque o WhatsApp do cliente.");return;}
+  window.open("https://wa.me/55"+fone+"?text="+encodeURIComponent(texto), "_blank");
+}
+function limparPedido(){
+  ["nome","cpf","whatsapp","cep","rua","bairro","cidade","estado","obs"].forEach(id=>get(id).value="");
+  get("resumo").textContent = "O resumo do pedido aparecerá aqui.";
+}
+function salvarConfig(){
+  config = {pixKey: val("pixKey"), mpLink: val("mpLink")};
+  localStorage.setItem("dlabs_config_final", JSON.stringify(config));
+  alert("Configuração salva.");
+}
+function copiarPix(){
+  const pix = val("pixKey") || config.pixKey || "";
+  if(!pix){alert("Cadastre sua chave Pix.");return;}
+  navigator.clipboard.writeText(pix).then(()=>alert("Pix copiado!")).catch(()=>alert("Não foi possível copiar."));
+}
+function abrirMP(){
+  const link = val("mpLink") || config.mpLink || "";
+  if(!link){alert("Cadastre o link do Mercado Pago.");return;}
+  window.open(link, "_blank");
+}
+function loginAdmin(){
+  if(val("adminPass") === ADMIN_PASSWORD){
+    go("painel");
+    renderPedidos();
+  }else{
+    alert("Senha incorreta.");
+  }
+}
+function renderPedidos(){
+  const tbody = get("listaPedidos");
+  if(!tbody) return;
+  const busca = (get("busca")?.value || "").toLowerCase();
+  const filtro = get("filtroStatus")?.value || "Todos";
+  let lista = pedidos.filter(p => {
+    const matchBusca = [p.nome,p.cpf,p.whatsapp,p.personagem].join(" ").toLowerCase().includes(busca);
+    const matchStatus = filtro === "Todos" || p.statusPedido === filtro;
+    return matchBusca && matchStatus;
+  });
+
+  get("sPedidos").textContent = pedidos.length;
+  get("sVendido").textContent = brl(pedidos.reduce((s,p)=>s+Number(p.valor||0),0));
+  get("sPagos").textContent = pedidos.filter(p=>p.statusPagamento==="Pago").length;
+  get("sAguardando").textContent = pedidos.filter(p=>p.statusPagamento!=="Pago").length;
+
+  tbody.innerHTML = lista.map(p => `
+    <tr>
+      <td><b>${p.nome}</b><br>CPF: ${p.cpf}<br>WhatsApp: ${p.whatsapp}<br><small>${p.data}</small></td>
+      <td>${p.personagem}<br>${p.produto}<br><b>${brl(p.valor)}</b></td>
+      <td>CEP: ${p.cep}<br>${p.rua}<br>${p.bairro}<br>${p.cidade} - ${p.estado}<br>${p.entrega}</td>
+      <td>${p.pagamento}<br><b>${p.statusPagamento}</b></td>
+      <td><span class="status">${p.statusPedido}</span><br>
+        <select onchange="alterarStatus(${p.id}, this.value)">
+          ${["Pedido recebido","Em produção","Finalizado","Enviado","Entregue"].map(s=>`<option ${p.statusPedido===s?"selected":""}>${s}</option>`).join("")}
+        </select>
+      </td>
+      <td>
+        <button class="primary" onclick="marcarPago(${p.id})">Pago</button>
+        <button class="secondary" onclick="resumoPedido(${p.id})">Resumo</button>
+        <button class="danger" onclick="excluirPedido(${p.id})">Excluir</button>
+      </td>
+    </tr>
+  `).join("") || `<tr><td colspan="6">Nenhum pedido encontrado.</td></tr>`;
+}
+function alterarStatus(id,status){
+  const p = pedidos.find(x=>x.id===id);
+  if(p){p.statusPedido=status;localStorage.setItem("dlabs_pedidos_final", JSON.stringify(pedidos));renderPedidos();}
+}
+function marcarPago(id){
+  const p = pedidos.find(x=>x.id===id);
+  if(p){p.statusPagamento="Pago";localStorage.setItem("dlabs_pedidos_final", JSON.stringify(pedidos));renderPedidos();}
+}
+function excluirPedido(id){
+  if(confirm("Excluir este pedido?")){
+    pedidos = pedidos.filter(p=>p.id!==id);
+    localStorage.setItem("dlabs_pedidos_final", JSON.stringify(pedidos));
+    renderPedidos();
+  }
+}
+function resumoPedido(id){
+  const p = pedidos.find(x=>x.id===id);
+  if(!p) return;
+  const txt = `Pedido D'Labs3D
+Cliente: ${p.nome}
+CPF: ${p.cpf}
+WhatsApp: ${p.whatsapp}
+Produto: ${p.produto}
+Personagem: ${p.personagem}
+Valor: ${brl(p.valor)}
+Entrega: ${p.entrega}
+Endereço: ${p.rua}, ${p.bairro}, ${p.cidade}-${p.estado}, CEP ${p.cep}
+Pagamento: ${p.pagamento} - ${p.statusPagamento}
+Status: ${p.statusPedido}`;
+  alert(txt);
+}
+function apagarTudo(){
+  if(confirm("Apagar todos os pedidos?")){
+    pedidos = [];
+    localStorage.setItem("dlabs_pedidos_final", "[]");
+    renderPedidos();
+  }
+}
+function exportarPedidos(){
+  const header = ["data","nome","cpf","whatsapp","personagem","produto","valor","cep","rua","bairro","cidade","estado","entrega","pagamento","statusPagamento","statusPedido","obs"];
+  const rows = pedidos.map(p=>header.map(h=>`"${String(p[h]||"").replaceAll('"','""')}"`).join(";"));
+  const csv = header.join(";") + "\n" + rows.join("\n");
+  const blob = new Blob([csv], {type:"text/csv;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "pedidos_dlabs3d.csv"; a.click();
+  URL.revokeObjectURL(url);
+}
+
+get("pixKey").value = config.pixKey || "";
+get("mpLink").value = config.mpLink || "";
+renderPedidos();
+</script>
+</body>
+</html>
